@@ -1,9 +1,9 @@
-import React from 'react';
 
-function App () {
-  return <div>
-    <h1>app</h1>
-  </div>
+import React, { ReactElement } from 'react'
+import Hello from './components/Hello';
+
+export default function App (): ReactElement {
+  return (
+    <Hello compiler="TypeScript" framework="React" />
+  );
 }
-
-export default App;
