@@ -1,33 +1,32 @@
-import { BannerPlugin, Configuration } from 'webpack';
-// BannerPlugin
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import WebpackBar from 'webpackbar';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import WebpackBuildNotifierPlugin from 'webpack-build-notifier';
-import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import CaseSensitivePathsWebpackPlugin from 'case-sensitive-paths-webpack-plugin';
-import CircularDependencyPlugin from 'circular-dependency-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
+import { BannerPlugin, Configuration } from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import WebpackBar from 'webpackbar'
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+import WebpackBuildNotifierPlugin from 'webpack-build-notifier'
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin'
+import CaseSensitivePathsWebpackPlugin from 'case-sensitive-paths-webpack-plugin'
+import CircularDependencyPlugin from 'circular-dependency-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'
 
-import { appBuild, appHtml, appPublic } from '../constant/paths';
-import { PROJECT_NAME, PROJECT_ROOT_PATH, IS_DEV } from '../constant/env';
-import getCssLoaders from '../constant/get-css-loaders';
-import HtmlMinifyOptions from '../constant/html-minify-Options';
+import { appBuild, appHtml, appPublic } from '../constant/paths'
+import { PROJECT_NAME, PROJECT_ROOT_PATH, IS_DEV } from '../constant/env'
+import getCssLoaders from '../constant/get-css-loaders'
+import HtmlMinifyOptions from '../constant/html-minify-options'
 
 const commonConfig: Configuration = {
   // context: resolve('./src/index.tsx'),
   output: {
     path: appBuild,
     filename: 'static/js/[name].[hash:8].js',
-    chunkFilename: 'static/js/[name].[hash:8].chunk.js',
+    chunkFilename: 'static/js/[name].[hash:8].chunk.js'
   },
   externals: [],
   resolve: {
     extensions: ['.ts', '.js', '.tsx', '.json'],
     alias: {
-      'react-dom': '@hot-loader/react-dom',
-    },
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
   module: {
     rules: [
@@ -35,11 +34,11 @@ const commonConfig: Configuration = {
         test: /\.(tsx?|js)$/,
         loader: 'babel-loader',
         options: { cacheDirectory: true },
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        use: [...getCssLoaders(0)],
+        use: [...getCssLoaders(0)]
       },
       {
         test: /\.less$/,
@@ -48,21 +47,21 @@ const commonConfig: Configuration = {
           {
             loader: 'less-loader',
             options: {
-              sourceMap: true,
-            },
-          },
-        ],
-      },
-    ],
+              sourceMap: true
+            }
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new WebpackBar({
       name: 'react-typescript-template',
-      color: '#52c41a',
+      color: '#52c41a'
     }),
     new BannerPlugin({
       raw: true,
-      banner: `/** @preserve Powered by abert */`,
+      banner: `/** @preserve Powered by abert */`
     }),
     new CleanWebpackPlugin(),
     // 友好错误提示
@@ -76,7 +75,7 @@ const commonConfig: Configuration = {
       exclude: /node_modules/,
       failOnError: true,
       allowAsyncCycles: false,
-      cwd: PROJECT_ROOT_PATH,
+      cwd: PROJECT_ROOT_PATH
     }),
     new HtmlWebpackPlugin({
       inject: true,
@@ -84,7 +83,7 @@ const commonConfig: Configuration = {
       hash: true,
       title: PROJECT_NAME,
       template: appHtml,
-      filename: 'index.html',
+      filename: 'index.html'
     }),
 
     new CopyWebpackPlugin({
@@ -95,14 +94,14 @@ const commonConfig: Configuration = {
           to: appBuild,
           toType: 'dir',
           globOptions: {
-            ignore: ['index.html'],
-          },
-        },
-      ],
+            ignore: ['index.html']
+          }
+        }
+      ]
     }),
     // TODO 存在问题，二次打包报错
-    new HardSourceWebpackPlugin({ info: { mode: 'none', level: 'warn' } }),
-  ],
-};
+    new HardSourceWebpackPlugin({ info: { mode: 'none', level: 'warn' } })
+  ]
+}
 
-export default commonConfig;
+export default commonConfig

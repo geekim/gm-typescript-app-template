@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": " cross-env-shell NODE_ENV=development  ts-node --files -P tsconfig.json scripts/start.ts --open",
     "build": "cross-env-shell NODE_ENV=production ts-node --files -P tsconfig.json scripts/build.ts",
-    "build-analyze": "cross-env-shell NODE_ENV=production ts-node --files -P scripts/tsconfig.json scripts/build.ts --analyze"
+    "build-analyze": "cross-env-shell NODE_ENV=production ts-node --files -P scripts/tsconfig.json scripts/build.ts --analyze",
+    "lint": "yarn run lint-eslint && yarn run lint-stylelint",
+    "lint-eslint": "eslint -c .eslintrc.js --ext .ts,.tsx,.js {src,scripts}/**/*.{ts,tsx,js}",
+    "lint-stylelint": "stylelint --config .stylelintrc.json src/**/*.less --syntax less"
   },
   "repository": {
     "type": "git",
@@ -29,6 +32,23 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js}": [
+      "eslint -c .eslintrc.js"
+    ],
+    "*.{css,less,scss}": [
+      "stylelint --config .stylelintrc.json"
+    ],
+    "*.{ts,tsx,js,json,html,yml,css,less,scss,md}": [
+      "prettier --write"
+    ]
+  },
   "browserslist": [
     "last 2 versions",
     "Firefox ESR",
@@ -49,6 +69,8 @@
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@hot-loader/react-dom": "^17.0.1",
     "@types/case-sensitive-paths-webpack-plugin": "^2.1.4",
     "@types/circular-dependency-plugin": "^5.0.2",
@@ -78,25 +100,34 @@
     "circular-dependency-plugin": "^5.2.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "compression-webpack-plugin": "^6.1.1",
+    "conventional-changelog-cli": "^2.1.1",
     "copy-webpack-plugin": "^6.4.1",
     "core-js": "^3.15.2",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
     "error-overlay-webpack-plugin": "^0.4.2",
     "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "fork-ts-checker-webpack-plugin": "^6.2.12",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "hard-source-webpack-plugin": "^0.13.1",
     "html-minifier": "^4.0.0",
     "html-webpack-plugin": "^4.5.2",
+    "husky": "^4.3.8",
     "less": "^4.1.1",
     "less-loader": "^7.3.0",
+    "lint-staged": "^11.0.0",
     "mini-css-extract-plugin": "^1.6.2",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^4.3.0",
     "postcss-normalize": "^10.0.0",
     "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.3.2",
     "react-hot-loader": "^4.13.0",
     "size-plugin": "^3.0.0",
     "source-map-loader": "^1.1.3",
