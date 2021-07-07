@@ -1,29 +1,31 @@
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server';
 
-import WebpackDevConfig from '../config/webpack.config.dev'
-
+import devConfig from '../config/webpack.config.dev'
+import {appBuild} from '../constant/paths'
 // 代理
 import proxy from '../constant/proxy'
+// 端口号
+const PORT:number = 3000;
 
-const DevServerOptions = {
-  contentBase:'',
+const DevServerOptions: WebpackDevServer.Configuration = {
+  contentBase:appBuild,
   hot:true,
   open:true,
   host:'localhost',
-  port:3000,
+  port:PORT,
   historyApiFallback:{
     disableDotRule:true,
   },
-  line:true,
+  inline:true,
   stats:'errors-only',
   clientLogLevel:'none',
   proxy,
 }
 
-const complier = webpack(WebpackDevConfig);
+const complier = webpack(devConfig);
 
 const server = new WebpackDevServer(complier,DevServerOptions)
 
 
-server.listen(DevServerOptions.port)
+server.listen(PORT)

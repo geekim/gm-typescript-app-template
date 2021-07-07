@@ -1,24 +1,25 @@
-import { BannerPlugin, Configuration, RuleSetUseItem } from 'webpack';
-
+import { Configuration } from 'webpack';
+// BannerPlugin
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import WebpackBar from 'webpackbar';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
-import WebpackBuildNotifierPlugin from 'webpack-build-notifier'
-// import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin'
-import CaseSensitivePathsWebpackPlugin from 'case-sensitive-paths-webpack-plugin'
-import CircularDependencyPlugin from 'circular-dependency-plugin'
+import WebpackBuildNotifierPlugin from 'webpack-build-notifier';
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import CaseSensitivePathsWebpackPlugin from 'case-sensitive-paths-webpack-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 import { appBuild, appHtml, appPublic } from '../constant/paths';
-import { PROJECT_NAME, PROJECT_ROOT_PATH } from '../constant/env';
+import { PROJECT_NAME, PROJECT_ROOT_PATH, IS_DEV } from '../constant/env';
 import getCssLoaders from '../constant/get-css-loaders';
+import HtmlMinifyOptions from '../constant/html-minify-Options';
 
 const commonConfig: Configuration = {
   // context: resolve('./src/index.tsx'),
   output: {
     path: appBuild,
-    filename: 'static/js/[name].[chunkhash:8].js',
-    chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
+    filename: 'static/js/[name].[hash:8].js',
+    chunkFilename: 'static/js/[name].[hash:8].chunk.js',
   },
   externals: [],
   resolve: {
@@ -59,7 +60,7 @@ const commonConfig: Configuration = {
       color: '#52c41a',
     }),
     new CleanWebpackPlugin(),
-    // new FriendlyErrorsWebpackPlugin(),
+    new FriendlyErrorsWebpackPlugin(),
     new WebpackBuildNotifierPlugin({ suppressSuccess: true }),
     new CaseSensitivePathsWebpackPlugin(),
     new CircularDependencyPlugin({
@@ -70,7 +71,7 @@ const commonConfig: Configuration = {
     }),
     new HtmlWebpackPlugin({
       inject: true,
-      minify: false,
+      minify: IS_DEV ? false : HtmlMinifyOptions,
       hash: true,
       title: PROJECT_NAME,
       template: appHtml,

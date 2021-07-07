@@ -15,9 +15,13 @@ const appPublic= resolveApp('./public');
 
 const appTsConfig = resolveApp('tsconfig.json')
 
+const appSrcIndex = resolveApp('./src/index.tsx')
+
+
 export { 
   appBuild,
   appHtml,
   appPublic,
-  appTsConfig
+  appTsConfig,
+  appSrcIndex
 }
