@@ -27,6 +27,6 @@
  
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts","scripts/*.ts"],
+  "include": ["src/**/*.ts","scripts/*.ts","typings/*.d.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

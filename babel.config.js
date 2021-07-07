@@ -18,10 +18,11 @@ module.exports = function (api) {
         presets: ['@babel/preset-typescript', envPreset],
         plugins: [
             '@babel/plugin-transform-runtime',
-            // '@babel/plugin-syntax-dynamic-import',
-            // '@babel/plugin-proposal-optional-chaining',
-            // ['@babel/plugin-proposal-class-properties', { loose: true }],
-            // ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }],
+            '@babel/plugin-syntax-dynamic-import',
+            '@babel/plugin-proposal-optional-chaining',
+            ["@babel/plugin-proposal-private-methods", { loose: true }],
+            ['@babel/plugin-proposal-class-properties', { loose: true }],
+            ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }],
         ],
         env: {
             development: {
@@ -30,11 +31,11 @@ module.exports = function (api) {
             },
             production: {
                 presets: ['@babel/preset-react'],
-                // plugins: [
-                //     'babel-plugin-dev-expression',
-                //     '@babel/plugin-transform-react-constant-elements',
-                //     '@babel/plugin-transform-react-inline-elements',
-                // ],
+                plugins: [
+                    'babel-plugin-dev-expression',
+                    '@babel/plugin-transform-react-constant-elements',
+                    '@babel/plugin-transform-react-inline-elements',
+                ],
             },
         },
     };
