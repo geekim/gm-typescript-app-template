@@ -3,8 +3,11 @@
   "version": "0.0.1",
   "description": "react脚手架",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": " cross-env NODE_ENV=development  ts-node --files -P tsconfig.json config/webpack.config.ts",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
