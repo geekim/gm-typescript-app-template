@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-import {loader as MiniCssExtractLoader} from 'mini-css-extract-plugin';
+import { loader as MiniCssExtractLoader } from 'mini-css-extract-plugin'
 
-import { IS_DEV } from './env';
+import { IS_DEV } from './env'
 
 const getCssLoaders = (importLoaders: number) => {
   return [
@@ -12,14 +12,14 @@ const getCssLoaders = (importLoaders: number) => {
       options: {
         modules: false,
         sourceMap: true,
-        importLoaders,
-      },
+        importLoaders
+      }
     },
     {
       loader: 'postcss-loader',
-      options: { sourceMap: true },
-    },
-  ];
-};
+      options: { sourceMap: true }
+    }
+  ]
+}
 
 export default getCssLoaders
