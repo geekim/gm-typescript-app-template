@@ -5,23 +5,17 @@ import { resolve } from 'path'
 import { PROJECT_ROOT_PATH } from './env'
 
 // const appDirectory = fs.realpathSync(process.cwd())
-const resolveApp = (relativePath: string) : string => resolve(PROJECT_ROOT_PATH,relativePath)
+const resolveApp = (relativePath: string): string =>
+  resolve(PROJECT_ROOT_PATH, relativePath)
 
-const appBuild = resolveApp('./build');
+const appBuild = resolveApp('./build')
 
-const appHtml = resolveApp('./public/index.html');
+const appHtml = resolveApp('./public/index.html')
 
-const appPublic= resolveApp('./public');
+const appPublic = resolveApp('./public')
 
 const appTsConfig = resolveApp('tsconfig.json')
 
 const appSrcIndex = resolveApp('./src/index.tsx')
 
-
-export { 
-  appBuild,
-  appHtml,
-  appPublic,
-  appTsConfig,
-  appSrcIndex
-}
+export { appBuild, appHtml, appPublic, appTsConfig, appSrcIndex }

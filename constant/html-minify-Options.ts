@@ -1,5 +1,5 @@
-'use strict';
-import { Options } from 'html-minifier';
+'use strict'
+import { Options } from 'html-minifier'
 
 const htmlMinifyOptions: Options = {
   collapseWhitespace: true,
@@ -12,7 +12,7 @@ const htmlMinifyOptions: Options = {
   minifyCSS: true,
   minifyJS: true,
   minifyURLs: true,
-  useShortDoctype: true,
-};
+  useShortDoctype: true
+}
 
 export default htmlMinifyOptions

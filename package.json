@@ -9,8 +9,8 @@
     "build": "cross-env-shell NODE_ENV=production ts-node --files -P tsconfig.json scripts/build.ts",
     "build-analyze": "cross-env-shell NODE_ENV=production ts-node --files -P scripts/tsconfig.json scripts/build.ts --analyze",
     "lint": "yarn run lint-eslint && yarn run lint-stylelint",
-    "lint-eslint": "eslint -c .eslintrc.js --ext .ts,.tsx,.js {src,scripts}/**/*.{ts,tsx,js}",
-    "lint-stylelint": "stylelint --config .stylelintrc.json src/**/*.less --syntax less"
+    "lint-eslint": "eslint -c .eslintrc.js --ext .ts,.tsx,.js {src,scripts,constant}/**/*.{ts,tsx,js}",
+    "lint-stylelint": "stylelint --config .stylelintrc src/**/*.less --syntax less"
   },
   "repository": {
     "type": "git",
@@ -43,7 +43,7 @@
       "eslint -c .eslintrc.js"
     ],
     "*.{css,less,scss}": [
-      "stylelint --config .stylelintrc.json"
+      "stylelint --config .stylelintrc"
     ],
     "*.{ts,tsx,js,json,html,yml,css,less,scss,md}": [
       "prettier --write"
@@ -133,6 +133,13 @@
     "source-map-loader": "^1.1.3",
     "speed-measure-webpack-plugin": "^1.5.0",
     "style-loader": "^2.0.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.3.0",
+    "stylelint-less": "^1.0.1",
+    "stylelint-order": "^4.1.0",
     "terser-webpack-plugin": "^4.2.3",
     "ts-loader": "^8.0.14",
     "ts-node": "^10.0.0",
