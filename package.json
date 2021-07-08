@@ -9,7 +9,7 @@
     "build": "cross-env-shell NODE_ENV=production ts-node --files -P tsconfig.json scripts/build.ts",
     "build-analyze": "cross-env-shell NODE_ENV=production ts-node --files -P scripts/tsconfig.json scripts/build.ts --analyze",
     "lint": "yarn run lint-eslint && yarn run lint-stylelint",
-    "lint-eslint": "eslint -c .eslintrc.js --ext .ts,.tsx,.js {src,scripts,constant}/**/*.{ts,tsx,js}",
+    "lint-eslint": "eslint -c .eslintrc.js --ext .ts,.tsx,.js src/**/*.{ts,tsx,js}",
     "lint-stylelint": "stylelint --config .stylelintrc src/**/*.less --syntax less"
   },
   "repository": {
@@ -79,7 +79,7 @@
     "@types/friendly-errors-webpack-plugin": "^0.1.2",
     "@types/hard-source-webpack-plugin": "^1.0.2",
     "@types/html-webpack-plugin": "^3.2.2",
-    "@types/mini-css-extract-plugin": "^1.2.3",
+    "@types/mini-css-extract-plugin": "^0.9.1",
     "@types/node": "^16.0.0",
     "@types/optimize-css-assets-webpack-plugin": "^5.0.3",
     "@types/react": "^17.0.0",
@@ -121,7 +121,7 @@
     "less": "^4.1.1",
     "less-loader": "^7.3.0",
     "lint-staged": "^11.0.0",
-    "mini-css-extract-plugin": "^1.6.2",
+    "mini-css-extract-plugin": "^0.12.0",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^4.3.0",
