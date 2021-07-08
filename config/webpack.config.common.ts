@@ -99,7 +99,6 @@ const commonConfig: Configuration = {
         }
       ]
     }),
-    // TODO 存在问题，二次打包报错
     new HardSourceWebpackPlugin({ info: { mode: 'none', level: 'warn' } })
   ]
 }
