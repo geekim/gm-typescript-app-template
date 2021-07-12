@@ -1,17 +1,89 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title><%= htmlWebpackPlugin.options.title %></title>
-    </head>
-    <body>
-        <div id="root"></div>
+<html data-scale="true" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 设置移动端视图 -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no,user-scalable=no"> -->
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover,shrink-to-fit=no,user-scalable=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <!-- 删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <!-- 设置状态栏颜色 -->
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
 
-        <!-- import cdn js -->
-        <!-- <% if(htmlWebpackPlugin.options.cdn) {%>
-            <% for(var js of htmlWebpackPlugin.options.cdn.js) { %>
-                <script src="<%= js %>"></script>
-            <% } %>
-        <% } %> -->
-    </body>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      body {
+        background-color: #f5f5f5;
+        margin: 0 !important;
+      }
+
+      #loading-container {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+      }
+
+      #loading-component {
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+        top: 40%;
+        transform: translateY(-50%);
+      }
+
+      #loading-component svg {
+        width: 16% !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div id="loading-container">
+      <div id="loading-component"></div>
+    </div> -->
+    <div id="root"></div>
+
+    <!-- <script src="//fe-cdn.zuolin.com/bodymovin/5.4.4/lottie.min.js"></script> -->
+    <!-- <script>
+      lottie.loadAnimation({
+        container: document.getElementById('loading-component'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'cycle_big.json'
+      })
+    </script> -->
+
+    <!-- import cdn js -->
+    <% if(htmlWebpackPlugin.options.cdn) {%> <% for(var js of
+    htmlWebpackPlugin.options.cdn.js) { %>
+    <script src="<%= js %>"></script>
+    <% } %> <% } %>
+
+    <script src="//fe-cdn.zuolin.com/fastclick/1.0.6/fastclick.js"></script>
+    <script>
+      if ('addEventListener' in document) {
+        document.addEventListener(
+          'DOMContentLoaded',
+          function () {
+            FastClick.attach(document.body)
+            FastClick.prototype.focus = function (targetElement) {
+              'use strict'
+              targetElement.focus()
+            }
+          },
+          false
+        )
+      }
+    </script>
+  </body>
 </html>
