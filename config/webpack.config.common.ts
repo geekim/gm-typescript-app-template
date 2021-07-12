@@ -9,19 +9,23 @@ import CircularDependencyPlugin from 'circular-dependency-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'
 
-import { appBuild, appHtml, appPublic } from '../constant/paths'
-import { PROJECT_NAME, PROJECT_ROOT_PATH, IS_DEV } from '../constant/env'
+import { appBuild, appHtml, appPublic, appContext } from '../constant/paths'
+import {
+  PROJECT_NAME,
+  PROJECT_ROOT_PATH,
+  IS_DEV,
+  CDN_JS
+} from '../constant/env'
 import getCssLoaders from '../constant/get-css-loaders'
-import HtmlMinifyOptions from '../constant/html-minify-options'
+import HtmlMinifyOptions from '../constant/html-minify-Options'
 
 const commonConfig: Configuration = {
-  // context: resolve('./src/index.tsx'),
+  context: appContext,
   output: {
     path: appBuild,
     filename: 'static/js/[name].[hash:8].js',
     chunkFilename: 'static/js/[name].[hash:8].chunk.js'
   },
-  externals: [],
   resolve: {
     extensions: ['.ts', '.js', '.tsx', '.json'],
     alias: {
@@ -48,6 +52,35 @@ const commonConfig: Configuration = {
             loader: 'less-loader',
             options: {
               sourceMap: true
+            }
+          }
+        ]
+      },
+      {
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              // 图片低于 10k 会被转换成 base64 格式的 dataUrl
+              limit: 10 * 1024,
+              // [hash] 占位符和 [contenthash] 是相同的含义
+              // 都是表示文件内容的 hash 值，默认是使用 md5 hash 算法
+              name: '[name].[contenthash:8].[ext]',
+              // 保存到 images 文件夹下面
+              outputPath: 'static/images/'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(ttf|woff|woff2|eot|otf)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: '[name]-[contenthash:8].[ext]',
+              outputPath: 'static/fonts/'
             }
           }
         ]
@@ -83,7 +116,10 @@ const commonConfig: Configuration = {
       hash: true,
       title: PROJECT_NAME,
       template: appHtml,
-      filename: 'index.html'
+      filename: 'index.html',
+      cdn: {
+        js: IS_DEV ? [] : CDN_JS
+      }
     }),
 
     new CopyWebpackPlugin({

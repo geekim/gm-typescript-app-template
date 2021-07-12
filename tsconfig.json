@@ -3,6 +3,8 @@
     /* Basic Options */
     "target": "ES2019",
     "module": "commonjs",
+    "jsx": "react",
+    "isolatedModules": true,
 
     /* Strict Type-Checking Options */
     "strict": true,
@@ -15,6 +17,7 @@
 
     /* Module Resolution Options */
     "moduleResolution": "node",
+    "baseUrl": "./",
     "esModuleInterop": true,
     "resolveJsonModule": true,
 
@@ -24,9 +27,10 @@
 
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true,
- 
+
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts","scripts/*.ts","typings/*.d.ts"],
+  // "include": ["src/**/*.ts","scripts/*.ts","typings/*.d.ts"],
+  // "include": ["src"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

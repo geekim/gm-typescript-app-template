@@ -18,4 +18,6 @@ const appTsConfig = resolveApp('tsconfig.json')
 
 const appSrcIndex = resolveApp('./src/index.tsx')
 
-export { appBuild, appHtml, appPublic, appTsConfig, appSrcIndex }
+const appContext = resolve(PROJECT_ROOT_PATH)
+
+export { appBuild, appHtml, appPublic, appTsConfig, appSrcIndex, appContext }
