@@ -11,12 +11,13 @@ import { merge } from 'webpack-merge'
 import SizePlugin from 'size-plugin'
 
 import commonConfig from './webpack.config.common'
-import { IS_ANALYZE } from '../constant/env'
+import { IS_ANALYZE, EXTERNALS } from '../constant/env'
 import { appSrcIndex, appTsConfig } from '../constant/paths'
 
 const prodConfig: Configuration = {
   mode: 'production',
   entry: appSrcIndex,
+  externals: EXTERNALS,
   optimization: {
     // 使用 minimizer 而不是默认的 uglifyJS
     minimize: true,
@@ -36,8 +37,8 @@ const prodConfig: Configuration = {
     }),
     new MiniCssExtractPlugin({
       // 文件名中插入文件内容的 hash 值
-      filename: 'css/[name].[contenthash].css',
-      chunkFilename: 'css/[id].[contenthash].css',
+      filename: '/static/css/[name].[contenthash].css',
+      chunkFilename: '/static/css/[id].[contenthash].css',
       ignoreOrder: false
     }),
     // 各个文件的gzip 压缩版
