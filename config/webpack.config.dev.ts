@@ -8,7 +8,7 @@ import { appTsConfig, appSrcIndex } from '../constant/paths'
 
 const devConfig: Configuration = {
   mode: 'development',
-  entry: ['react-hot-loader/patch', appSrcIndex],
+  entry: [appSrcIndex],
   devtool: 'source-map',
   module: {
     rules: [{ enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }]

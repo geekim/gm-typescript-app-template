@@ -13,6 +13,8 @@ const IS_ANALYZE = !!argv.analyze // 是否打开分析页面
 
 const DEFAULT_PORT = 4000 // 默认端口号
 
+const DEFAULT_HOST = 'localhost' // 默认 host
+
 // 用于引入CDN添加到index.html
 const CDN_JS = [
   '//fe-cdn.zuolin.com/react/17.0.1/umd/react.production.min.js',
@@ -34,5 +36,6 @@ export {
   IS_ANALYZE,
   DEFAULT_PORT,
   EXTERNALS,
-  CDN_JS
+  CDN_JS,
+  DEFAULT_HOST
 }
