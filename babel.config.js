@@ -28,7 +28,7 @@ module.exports = function (api) {
     env: {
       development: {
         presets: [['@babel/preset-react', { development: true }]],
-        plugins: ['react-hot-loader/babel']
+        plugins: ['react-refresh/babel']
       },
       production: {
         presets: ['@babel/preset-react'],

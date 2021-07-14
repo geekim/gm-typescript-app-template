@@ -5,6 +5,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import WebpackBuildNotifierPlugin from 'webpack-build-notifier'
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin'
 import CaseSensitivePathsWebpackPlugin from 'case-sensitive-paths-webpack-plugin'
+import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 import CircularDependencyPlugin from 'circular-dependency-plugin'
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin'
@@ -27,10 +28,7 @@ const commonConfig: Configuration = {
     chunkFilename: 'static/js/[name].[hash:8].chunk.js'
   },
   resolve: {
-    extensions: ['.ts', '.js', '.tsx', '.json'],
-    alias: {
-      'react-dom': '@hot-loader/react-dom'
-    }
+    extensions: ['.ts', '.js', '.tsx', '.json']
   },
   module: {
     rules: [
@@ -88,6 +86,7 @@ const commonConfig: Configuration = {
     ]
   },
   plugins: [
+    new ReactRefreshPlugin(),
     new WebpackBar({
       name: 'react-typescript-template',
       color: '#52c41a'
